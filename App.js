@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ScrollView, Text } from 'react-native';
 
 import EditableTimer from './components/EditableTimer';
-import ToggleableTimerForm from './components/ToggleableTimerForm';
+import ToggleableTimerForm from './components/TimerFormToggler';
 
 export default class App extends React.Component {
   render() {
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({ appContainer: {
       paddingBottom: 15,
       borderBottomWidth: 1,
       borderBottomColor: '#D6D7DA',
-  }, title: {
+  }, 
+  title: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',

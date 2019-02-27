@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'; 
 import React from 'react';
 
-export default function TimerButton({ color,
+export default function TimerButton({ 
+  color,
   title,
   small,
   onPress,
@@ -16,12 +17,14 @@ export default function TimerButton({ color,
 ); 
 }
 
-const styles=StyleSheet.create({ button: {
+const styles=StyleSheet.create({ 
+  button: {
     marginTop: 10,
     minWidth: 100,
     borderWidth: 2,
     borderRadius: 3,
-}, small: {
+  }, 
+  small: {
     fontSize: 14,
     padding: 5,
   },
@@ -42,4 +45,5 @@ const styles=StyleSheet.create({ button: {
     fontWeight: 'bold',
     textAlign: 'center',
     paddingVertical: 10,
-}, });
+  }, 
+});
