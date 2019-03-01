@@ -4,7 +4,28 @@ import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import EditableTimer from './components/EditableTimer';
 import NewTimerToggler from './components/NewTimerToggler';
 
+import uuidv4 from 'uuid/v4';
+
 export default class App extends React.Component {
+  state = {
+    timers: [
+      {
+        title: 'Stare at the ceiling',
+        project: 'Recreational',
+        id: uuidv4(),
+        elapsed: 5456099,
+        isRunning: true
+      },
+      {
+        title: 'Cut/eat watermelon',
+        project: 'Kitchen Chores',
+        id: uuidv4(),
+        elapsed: 1273998,
+        isRunning: false
+      }
+    ],
+  }
+
   render() {
     return (
       <View style={styles.appContainer}>
@@ -13,18 +34,17 @@ export default class App extends React.Component {
         </View>
         <ScrollView style={styles.timerList}>
           <NewTimerToggler isOpen={false}/> 
-          <EditableTimer
-            id="1"
-            title="Mow the lawn"
-            project="House Chores"
-            elapsed="8986300"
-            isRunning/>
-          <EditableTimer
-            id="2"
-            title="Bake squash"
-            project="Kitchen Chores"
-            elapsed="3890985"
-            editFormOpen/>
+          {timers.map(
+            ({title, project, id, elapsed, isRunning}) => (
+              <EditableTimer
+                key={id}
+                id={id}
+                title={title}
+                project={project}
+                elapsed={elapsed}
+                isRunning={isRunning}/>
+            )
+          )}
         </ScrollView>
       </View> 
     );      
