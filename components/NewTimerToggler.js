@@ -8,7 +8,15 @@ export default class NewTimerToggler extends React.Component {
     isOpen: false
   }
   
-  handlFormOpen = () => this.setState({isOpen: true})
+  handleFormOpen = () => this.setState({isOpen: true})
+
+  handleFormClose = () => this.setState({isOpen: false})
+
+  handleFormSubmit = timerData => {
+    const { onFormSubmit } = this.props;
+    onFormSubmit(timerData);
+    this.setState({ isOpen: false});
+  }
 
   render() {
     const { isOpen } = this.state;
@@ -17,11 +25,13 @@ export default class NewTimerToggler extends React.Component {
       <View 
         style={[styles.container, !isOpen && styles.buttonPadding]}>
         { isOpen 
-            ? <TimerForm/> 
-            : <TimerButton 
-                title="+" 
-                color="black"
-                onPress={this.handleFormOpen}/>
+          ? <TimerForm
+              onFormSubmit={this.handleFormSubmit}
+              onFormClose={this.handleFormClose}/> 
+          : <TimerButton 
+              title="+" 
+              color="black"
+              onPress={this.handleFormOpen}/>
         }
       </View> );
   }

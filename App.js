@@ -5,6 +5,7 @@ import EditableTimer from './components/EditableTimer';
 import NewTimerToggler from './components/NewTimerToggler';
 
 import uuidv4 from 'uuid/v4';
+import { newTimer } from './utils/TimerUtils';
 
 export default class App extends React.Component {
   state = {
@@ -26,25 +27,31 @@ export default class App extends React.Component {
     ],
   }
 
+  handleCreation = timerData => {
+    const { timers } = this.state;
+    this.setState({timers: [newTimer(timerData), ...timers]});
+  }
+
   render() {
+    const { timers } = this.state;
     return (
       <View style={styles.appContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Timers</Text>
         </View>
         <ScrollView style={styles.timerList}>
-          <NewTimerToggler isOpen={false}/> 
-          {timers.map(
-            ({title, project, id, elapsed, isRunning}) => (
-              <EditableTimer
-                key={id}
-                id={id}
-                title={title}
-                project={project}
-                elapsed={elapsed}
-                isRunning={isRunning}/>
-            )
-          )}
+          <NewTimerToggler onFormSubmit={this.handleCreation}/> 
+            {timers.map(
+              ({title, project, id, elapsed, isRunning}) => (
+                <EditableTimer
+                  key={id}
+                  id={id}
+                  title={title}
+                  project={project}
+                  elapsed={elapsed}
+                  isRunning={isRunning}/>
+              )
+            )}
         </ScrollView>
       </View> 
     );      

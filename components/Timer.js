@@ -6,7 +6,7 @@ import TimerButton from './TimerButton';
 
 export default function Timer({ title, project, elapsed }) {
   const elapsedString = millisecondsToHuman(elapsed);
-
+  
   return (
     <View style={styles.timerContainer}>
       <Text style={styles.title}>{title}</Text>
