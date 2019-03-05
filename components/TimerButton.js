@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'; 
+import { StyleSheet, Text, TouchableOpacity, Platform } from 'react-native'; 
 import React from 'react';
 
 export default function TimerButton({ 
@@ -6,13 +6,17 @@ export default function TimerButton({
   title,
   small,
   onPress,
+  text,
+  width
 }){ return (
     <TouchableOpacity
-      style={[styles.button, { borderColor: color }]}
+      style={[styles.button, 
+        { backgroundColor: color },
+        { width: width ? Number(width) : null}]}
       onPress={onPress}> 
         <Text style={[styles.buttonText, 
           small ? styles.small : styles.large,
-          { color },]}> {title} </Text>
+          {color: text ? text : '#fff'}]}> {title} </Text>
     </TouchableOpacity>
 ); 
 }
@@ -20,30 +24,24 @@ export default function TimerButton({
 const styles=StyleSheet.create({ 
   button: {
     marginTop: 10,
-    minWidth: 100,
-    borderWidth: 2,
-    borderRadius: 3,
+    borderRadius: 50,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }, 
   small: {
     fontSize: 14,
     padding: 5,
+    fontWeight: '600',
   },
   large: {
-    fontSize: 16,
+    fontSize: 20,
     padding: 10,
+    borderRadius: 50,
+    fontWeight: '400',
   },
   buttonText: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: '#fff',
+    fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'monospace',
   },
-  title: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  elapsedTime: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    paddingVertical: 10,
-  }, 
 });
