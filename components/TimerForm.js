@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput, KeyboardAvoidingView} from 'react-native';
 import TimerButton from './TimerButton';
 
 export default class TimerForm extends React.Component { 
@@ -8,12 +8,20 @@ export default class TimerForm extends React.Component {
     project: this.props.id ? this.props.project : ''
   }
 
+  secondInput = (input) => {
+    this.nextInput = input;
+  }
+
+  focusNextInput = () => {
+    this.nextInput.focus();
+  }
+
+
   handleTitleChange = title => this.setState({title});
 
   handleProjectChange = project => this.setState({project});
 
   handleSubmit = () => {
-    console.log(this.state);
     const { onFormSubmit, id } = this.props;
     const { title, project } = this.state;
     onFormSubmit({id, title, project});
@@ -33,29 +41,35 @@ export default class TimerForm extends React.Component {
               style={styles.textInput}
               underlineColorAndroid="transparent"
               onChangeText={this.handleTitleChange}
-              value={title}/> 
+              value={title}
+              onSubmitEditing={this.focusNextInput}/> 
           </View>
         </View>
         <View style={styles.attributeContainer}>
           <Text style={styles.textInputTitle}>Project</Text>
           <View style={styles.textInputContainer}>
-            <TextInput style={styles.textInput}
+            <TextInput 
+              ref={this.secondInput}
+              style={styles.textInput}
               underlineColorAndroid="transparent"
               onChangeText={this.handleProjectChange}
-              value={project}/> 
+              value={project}
+              onSubmitEditing={this.handleSubmit}/> 
           </View>
         </View>
         <View style={styles.buttonGroup}>
           <TimerButton 
+            style={styles.buttons}
             small 
-            color="#21BA45" 
-            title={submitText} 
-            onPress={this.handleSubmit}/>
-          <TimerButton 
-            small 
-            color="#DB2828" 
+            text="#DB2828" 
             title="Cancel" 
             onPress={onFormClose}/>
+          <TimerButton 
+            style={styles.buttons}
+            small 
+            text="#21BA45" 
+            title={submitText} 
+            onPress={this.handleSubmit}/>
         </View>
       </View> 
     );
@@ -65,8 +79,8 @@ export default class TimerForm extends React.Component {
 const styles = StyleSheet.create({ 
   formContainer: {
     backgroundColor: 'white',
-    borderColor: '#D6D7DA',
-    borderWidth: 2,
+    borderColor: '#e1ddf1',
+    borderWidth: 1,
     borderRadius: 10,
     padding: 15,
     margin: 15,
@@ -92,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   buttonGroup: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-  }
+  },
 });
