@@ -82,7 +82,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.appContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>My Timers</Text>
+          <Text style={styles.title}><Text style={styles.titleHighlight}>my</Text>Timer</Text>
         </View>
         <KeyboardAvoidingView
           behavior="padding"
@@ -124,9 +124,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#fff',
   }, 
+  titleHighlight: {
+    color: '#3b91de',
+    fontWeight: '700',
+    fontStyle: 'italic',
+  },
   title: {
     fontSize: 20,
-    fontWeight: '200',
+    fontWeight: '300',
     textAlign: 'center',
     fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'monospace',
   },
