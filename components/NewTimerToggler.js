@@ -30,7 +30,7 @@ export default class NewTimerToggler extends React.Component {
               onFormClose={this.handleFormClose}/> 
           : <TimerButton 
               title="+" 
-              color="black"
+              color="#3b91de"
               onPress={this.handleFormOpen}/>
         }
       </View> );
@@ -39,9 +39,11 @@ export default class NewTimerToggler extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10,
+    paddingVertical: 15,
   },
   buttonPadding: {
-    paddingHorizontal: 15,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
